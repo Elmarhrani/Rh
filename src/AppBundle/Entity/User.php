@@ -86,12 +86,7 @@ class User extends BaseUser
      * @ORM\Column(name="nbre_enfant", type="integer")
      */
     protected $nbreEnfant;
-    /**
-     * @var int
-     * @Assert\NotBlank()
-     * @ORM\Column(name="salaire1", type="integer")
-     */
-    protected $salaire1;
+
 
     public function __construct()
     {
