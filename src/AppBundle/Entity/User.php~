@@ -1,0 +1,97 @@
+<?php
+// src/AppBundle/Entity/User.php
+
+namespace AppBundle\Entity;
+
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="fos_user")
+ */
+class User extends BaseUser
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var string
+     * @Assert\NotBlank()
+     * @ORM\Column(name="nom", type="string", length=125)
+     */
+    protected $nom;
+
+    /**
+     * @var string
+     * @Assert\NotBlank()
+     * @ORM\Column(name="prenom", type="string", length=125)
+     */
+    protected $prenom;
+
+    /**
+     * @Assert\NotBlank()
+     * @ORM\Column(name="adresse", type="string", length=255)
+     */
+    protected $adresse;
+
+    /**
+     * @var string
+     * @Assert\NotBlank()
+     * @ORM\Column(name="telephone", type="string", length=40)
+     */
+    protected $tel;
+    /**
+     * @Assert\NotBlank()
+     * @ORM\Column(name="dateNaissance", type="date")
+     */
+    protected $dateNaiss;
+
+
+    /**
+     * @Assert\NotBlank()
+     * @ORM\Column(name="niveau", type="string" )
+     */
+    protected $niveau;
+
+    /**
+     * @var string
+     * @Assert\NotBlank()
+     * @ORM\Column(name="CIN", type="string", length=10)
+     */
+    protected $CIN;
+
+    /**
+     * @var string
+     * @Assert\NotBlank()
+     * @ORM\Column(name="CNSS", type="string", length=15)
+     */
+    protected $CNSS;
+
+    /**
+     * @var string
+     * @Assert\NotBlank()
+     * @ORM\Column(name="situation_familaile", type="string", length=40)
+     */
+    protected $sitFamilaile;
+
+    /**
+     * @var int
+     * @Assert\NotBlank()
+     * @ORM\Column(name="nbre_enfant", type="integer")
+     */
+    protected $nbreEnfant;
+
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
+
+
+}
