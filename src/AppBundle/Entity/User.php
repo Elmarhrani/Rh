@@ -86,6 +86,12 @@ class User extends BaseUser
      * @ORM\Column(name="nbre_enfant", type="integer")
      */
     protected $nbreEnfant;
+    /**
+     * @var int
+     * @Assert\NotBlank()
+     * @ORM\Column(name="salaire", type="float" )
+     */
+    private $salaire;
 
     public function __construct()
     {
@@ -323,5 +329,28 @@ class User extends BaseUser
     public function getNbreEnfant()
     {
         return $this->nbreEnfant;
+    }
+
+    /**
+     * Set salaire
+     *
+     * @param float $salaire
+     * @return User
+     */
+    public function setSalaire($salaire)
+    {
+        $this->salaire = $salaire;
+
+        return $this;
+    }
+
+    /**
+     * Get salaire
+     *
+     * @return float 
+     */
+    public function getSalaire()
+    {
+        return $this->salaire;
     }
 }
