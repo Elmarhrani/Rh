@@ -22,71 +22,65 @@ class User extends BaseUser
 
     /**
      * @var string
-     * @Assert\NotBlank()
-     * @ORM\Column(name="nom", type="string", length=125)
+     * @ORM\Column(name="nom", type="string", length=125, nullable=true)
      */
     protected $nom;
 
     /**
      * @var string
-     * @Assert\NotBlank()
-     * @ORM\Column(name="prenom", type="string", length=125)
+     * @ORM\Column(name="prenom", type="string", length=125, nullable=true)
      */
     protected $prenom;
 
     /**
-     * @Assert\NotBlank()
-     * @ORM\Column(name="adresse", type="string", length=255)
+     * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
      */
     protected $adresse;
 
     /**
      * @var string
-     * @Assert\NotBlank()
-     * @ORM\Column(name="telephone", type="string", length=40)
+     * @ORM\Column(name="telephone", type="string", length=40, nullable=true)
      */
     protected $tel;
     /**
-     * @Assert\NotBlank()
-     * @ORM\Column(name="dateNaissance", type="date")
+     * @ORM\Column(name="dateNaissance", type="date", nullable=true)
      */
     protected $dateNaiss;
 
 
     /**
-     * @Assert\NotBlank()
-     * @ORM\Column(name="niveau", type="string" )
+     * @ORM\Column(name="niveau", type="string", nullable=true )
      */
     protected $niveau;
 
     /**
      * @var string
-     * @Assert\NotBlank()
-     * @ORM\Column(name="CIN", type="string", length=10)
+     * @ORM\Column(name="CIN", type="string", length=10, nullable=true)
      */
     protected $CIN;
 
     /**
      * @var string
-     * @Assert\NotBlank()
-     * @ORM\Column(name="CNSS", type="string", length=15)
+     * @ORM\Column(name="CNSS", type="string", length=15, nullable=true)
      */
     protected $CNSS;
 
     /**
      * @var string
-     * @Assert\NotBlank()
-     * @ORM\Column(name="situation_familaile", type="string", length=40)
+     * @ORM\Column(name="situation_familaile", type="string", length=40, nullable=true)
      */
     protected $sitFamilaile;
 
     /**
      * @var int
-     * @Assert\NotBlank()
-     * @ORM\Column(name="nbre_enfant", type="integer")
+     * @ORM\Column(name="nbre_enfant", type="integer", nullable=true)
      */
     protected $nbreEnfant;
-
+    /**
+     * @var int
+     * @ORM\Column(name="salaire", type="float", nullable=true )
+     */
+    private $salaire;
 
     public function __construct()
     {
@@ -112,7 +106,7 @@ class User extends BaseUser
     /**
      * Get nom
      *
-     * @return string 
+     * @return string
      */
     public function getNom()
     {
@@ -135,7 +129,7 @@ class User extends BaseUser
     /**
      * Get prenom
      *
-     * @return string 
+     * @return string
      */
     public function getPrenom()
     {
@@ -158,7 +152,7 @@ class User extends BaseUser
     /**
      * Get adresse
      *
-     * @return string 
+     * @return string
      */
     public function getAdresse()
     {
@@ -181,7 +175,7 @@ class User extends BaseUser
     /**
      * Get tel
      *
-     * @return string 
+     * @return string
      */
     public function getTel()
     {
@@ -204,7 +198,7 @@ class User extends BaseUser
     /**
      * Get dateNaiss
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateNaiss()
     {
@@ -227,7 +221,7 @@ class User extends BaseUser
     /**
      * Get niveau
      *
-     * @return string 
+     * @return string
      */
     public function getNiveau()
     {
@@ -250,7 +244,7 @@ class User extends BaseUser
     /**
      * Get CIN
      *
-     * @return string 
+     * @return string
      */
     public function getCIN()
     {
@@ -273,7 +267,7 @@ class User extends BaseUser
     /**
      * Get CNSS
      *
-     * @return string 
+     * @return string
      */
     public function getCNSS()
     {
@@ -296,7 +290,7 @@ class User extends BaseUser
     /**
      * Get sitFamilaile
      *
-     * @return string 
+     * @return string
      */
     public function getSitFamilaile()
     {
@@ -319,10 +313,33 @@ class User extends BaseUser
     /**
      * Get nbreEnfant
      *
-     * @return integer 
+     * @return integer
      */
     public function getNbreEnfant()
     {
         return $this->nbreEnfant;
+    }
+
+    /**
+     * Set salaire
+     *
+     * @param float $salaire
+     * @return User
+     */
+    public function setSalaire($salaire)
+    {
+        $this->salaire = $salaire;
+
+        return $this;
+    }
+
+    /**
+     * Get salaire
+     *
+     * @return float
+     */
+    public function getSalaire()
+    {
+        return $this->salaire;
     }
 }
