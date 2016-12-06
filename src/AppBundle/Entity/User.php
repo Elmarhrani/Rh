@@ -93,6 +93,11 @@ class User extends BaseUser
      */
     private $salaire;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\FicheSalaire", mappedBy="personne",cascade={"remove"})
+     */
+    protected $fiches;
+
     public function __construct()
     {
         parent::__construct();
@@ -352,5 +357,38 @@ class User extends BaseUser
     public function getSalaire()
     {
         return $this->salaire;
+    }
+
+    /**
+     * Add fiches
+     *
+     * @param \AppBundle\Entity\FicheSalaire $fiches
+     * @return User
+     */
+    public function addFich(\AppBundle\Entity\FicheSalaire $fiches)
+    {
+        $this->fiches[] = $fiches;
+
+        return $this;
+    }
+
+    /**
+     * Remove fiches
+     *
+     * @param \AppBundle\Entity\FicheSalaire $fiches
+     */
+    public function removeFich(\AppBundle\Entity\FicheSalaire $fiches)
+    {
+        $this->fiches->removeElement($fiches);
+    }
+
+    /**
+     * Get fiches
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFiches()
+    {
+        return $this->fiches;
     }
 }

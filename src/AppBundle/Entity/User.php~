@@ -93,6 +93,11 @@ class User extends BaseUser
      */
     private $salaire;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\FicheSalaire", mappedBy="personne",cascade={"remove"})
+     */
+    protected $fiches;
+
     public function __construct()
     {
         parent::__construct();
@@ -329,5 +334,28 @@ class User extends BaseUser
     public function getNbreEnfant()
     {
         return $this->nbreEnfant;
+    }
+
+    /**
+     * Set salaire
+     *
+     * @param float $salaire
+     * @return User
+     */
+    public function setSalaire($salaire)
+    {
+        $this->salaire = $salaire;
+
+        return $this;
+    }
+
+    /**
+     * Get salaire
+     *
+     * @return float 
+     */
+    public function getSalaire()
+    {
+        return $this->salaire;
     }
 }
