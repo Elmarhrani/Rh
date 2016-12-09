@@ -51,6 +51,14 @@ class Formation
 
 
     /**
+     * personne concerne par la formation.
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User" , mappedBy="formations" )
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $personnes;
+
+    /**
      * Get id
      *
      * @return integer 

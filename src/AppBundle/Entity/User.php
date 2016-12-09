@@ -98,6 +98,15 @@ class User extends BaseUser
      */
     protected $fiches;
 
+    /**
+     * Liste des Formations de la personne.
+     *
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", inversedBy="personnes" )
+     * @ORM\JoinTable(name="formation_personne")
+     */
+    protected $formations;
+
     public function __construct()
     {
         parent::__construct();
