@@ -51,6 +51,14 @@ class Formation
 
 
     /**
+     * personne concerne par la formation.
+     *
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Personne_Formation", mappedBy="formation")
+     */
+    private $personne_formations;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -128,4 +136,36 @@ class Formation
     {
         return $this->remarque;
     }
+
+    /**
+     * Set type
+     *
+     * @param \AppBundle\Entity\TypeFormation $type
+     * @return Formation
+     */
+    public function setType(\AppBundle\Entity\TypeFormation $type = null)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return \AppBundle\Entity\TypeFormation 
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->personne_formations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
 }

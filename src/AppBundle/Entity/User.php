@@ -99,13 +99,15 @@ class User extends BaseUser
     protected $fiches;
 
     /**
-     * Liste des Formations de la personne.
-     *
-     *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", inversedBy="personnes" )
-     * @ORM\JoinTable(name="formation_personne")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Personne_Formation", mappedBy="user",cascade={"remove"})
      */
-    protected $formations;
+    protected $personne_formations;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Messages", mappedBy="user",cascade={"remove"})
+     */
+    protected $message;
+
 
     public function __construct()
     {
@@ -399,5 +401,71 @@ class User extends BaseUser
     public function getFiches()
     {
         return $this->fiches;
+    }
+
+    /**
+     * Add personne_formations
+     *
+     * @param \AppBundle\Entity\Personne_Formation $personneFormations
+     * @return User
+     */
+    public function addPersonneFormation(\AppBundle\Entity\Personne_Formation $personneFormations)
+    {
+        $this->personne_formations[] = $personneFormations;
+
+        return $this;
+    }
+
+    /**
+     * Remove personne_formations
+     *
+     * @param \AppBundle\Entity\Personne_Formation $personneFormations
+     */
+    public function removePersonneFormation(\AppBundle\Entity\Personne_Formation $personneFormations)
+    {
+        $this->personne_formations->removeElement($personneFormations);
+    }
+
+    /**
+     * Get personne_formations
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPersonneFormations()
+    {
+        return $this->personne_formations;
+    }
+
+    /**
+     * Add message
+     *
+     * @param \AppBundle\Entity\Messages $message
+     * @return User
+     */
+    public function addMessage(\AppBundle\Entity\Messages $message)
+    {
+        $this->message[] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Remove message
+     *
+     * @param \AppBundle\Entity\Messages $message
+     */
+    public function removeMessage(\AppBundle\Entity\Messages $message)
+    {
+        $this->message->removeElement($message);
+    }
+
+    /**
+     * Get message
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMessage()
+    {
+        return $this->message;
     }
 }

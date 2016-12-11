@@ -22,6 +22,13 @@ class Pret
     private $id;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="mois", type="date")
+     */
+    private $mois;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\DetailsPret", mappedBy="pret", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
@@ -75,5 +82,28 @@ class Pret
     public function getDetailsPret()
     {
         return $this->detailsPret;
+    }
+
+    /**
+     * Set mois
+     *
+     * @param \DateTime $mois
+     * @return Pret
+     */
+    public function setMois($mois)
+    {
+        $this->mois = $mois;
+
+        return $this;
+    }
+
+    /**
+     * Get mois
+     *
+     * @return \DateTime 
+     */
+    public function getMois()
+    {
+        return $this->mois;
     }
 }

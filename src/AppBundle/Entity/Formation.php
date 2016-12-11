@@ -53,10 +53,10 @@ class Formation
     /**
      * personne concerne par la formation.
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User" , mappedBy="formations" )
-     * @ORM\JoinColumn(nullable=true)
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Personne_Formation", mappedBy="formation")
      */
-    private $personnes;
+    private $personne_formations;
 
     /**
      * Get id
@@ -158,5 +158,47 @@ class Formation
     public function getType()
     {
         return $this->type;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->personne_formations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
+
+    /**
+     * Add personne_formations
+     *
+     * @param \AppBundle\Entity\Personne_Formation $personneFormations
+     * @return Formation
+     */
+    public function addPersonneFormation(\AppBundle\Entity\Personne_Formation $personneFormations)
+    {
+        $this->personne_formations[] = $personneFormations;
+
+        return $this;
+    }
+
+    /**
+     * Remove personne_formations
+     *
+     * @param \AppBundle\Entity\Personne_Formation $personneFormations
+     */
+    public function removePersonneFormation(\AppBundle\Entity\Personne_Formation $personneFormations)
+    {
+        $this->personne_formations->removeElement($personneFormations);
+    }
+
+    /**
+     * Get personne_formations
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPersonneFormations()
+    {
+        return $this->personne_formations;
     }
 }

@@ -98,6 +98,17 @@ class User extends BaseUser
      */
     protected $fiches;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Personne_Formation", mappedBy="user",cascade={"remove"})
+     */
+    protected $personne_formations;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Messages", mappedBy="user",cascade={"remove"})
+     */
+    protected $message;
+
+
     public function __construct()
     {
         parent::__construct();
@@ -357,5 +368,71 @@ class User extends BaseUser
     public function getSalaire()
     {
         return $this->salaire;
+    }
+
+    /**
+     * Add fiches
+     *
+     * @param \AppBundle\Entity\FicheSalaire $fiches
+     * @return User
+     */
+    public function addFich(\AppBundle\Entity\FicheSalaire $fiches)
+    {
+        $this->fiches[] = $fiches;
+
+        return $this;
+    }
+
+    /**
+     * Remove fiches
+     *
+     * @param \AppBundle\Entity\FicheSalaire $fiches
+     */
+    public function removeFich(\AppBundle\Entity\FicheSalaire $fiches)
+    {
+        $this->fiches->removeElement($fiches);
+    }
+
+    /**
+     * Get fiches
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFiches()
+    {
+        return $this->fiches;
+    }
+
+    /**
+     * Add personne_formations
+     *
+     * @param \AppBundle\Entity\Personne_Formation $personneFormations
+     * @return User
+     */
+    public function addPersonneFormation(\AppBundle\Entity\Personne_Formation $personneFormations)
+    {
+        $this->personne_formations[] = $personneFormations;
+
+        return $this;
+    }
+
+    /**
+     * Remove personne_formations
+     *
+     * @param \AppBundle\Entity\Personne_Formation $personneFormations
+     */
+    public function removePersonneFormation(\AppBundle\Entity\Personne_Formation $personneFormations)
+    {
+        $this->personne_formations->removeElement($personneFormations);
+    }
+
+    /**
+     * Get personne_formations
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPersonneFormations()
+    {
+        return $this->personne_formations;
     }
 }
