@@ -5,7 +5,6 @@ namespace AppBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -22,81 +21,69 @@ class User extends BaseUser
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="matricule", type="string", length=20, unique=true)
+     * @ORM\Column(name="matricule", type="string", length=20 ,nullable=true)
      */
     private $matricule;
 
     /**
      * @var string
-     * @Assert\NotBlank()
-     * @ORM\Column(name="nom", type="string", length=125)
+     * @ORM\Column(name="nom", type="string", length=125,nullable=true)
      */
     protected $nom;
 
     /**
      * @var string
-     * @Assert\NotBlank()
-     * @ORM\Column(name="prenom", type="string", length=125)
+     * @ORM\Column(name="prenom", type="string", length=125,nullable=true)
      */
     protected $prenom;
 
     /**
-     * @Assert\NotBlank()
-     * @ORM\Column(name="adresse", type="string", length=255)
+     * @ORM\Column(name="adresse", type="string", length=255,nullable=true)
      */
     protected $adresse;
 
     /**
      * @var string
-     * @Assert\NotBlank()
-     * @ORM\Column(name="telephone", type="string", length=40)
+     * @ORM\Column(name="telephone", type="string", length=40,nullable=true)
      */
     protected $tel;
     /**
-     * @Assert\NotBlank()
-     * @ORM\Column(name="dateNaissance", type="date")
+     * @ORM\Column(name="dateNaissance", type="date",nullable=true)
      */
     protected $dateNaiss;
 
 
     /**
-     * @Assert\NotBlank()
-     * @ORM\Column(name="niveau", type="string" )
+     * @ORM\Column(name="niveau", type="string",nullable=true )
      */
     protected $niveau;
 
     /**
      * @var string
-     * @Assert\NotBlank()
-     * @ORM\Column(name="CIN", type="string", length=10)
+     * @ORM\Column(name="CIN", type="string", length=10,nullable=true)
      */
     protected $CIN;
 
     /**
      * @var string
-     * @Assert\NotBlank()
-     * @ORM\Column(name="CNSS", type="string", length=15)
+     * @ORM\Column(name="CNSS", type="string", length=15,nullable=true)
      */
     protected $CNSS;
 
     /**
      * @var string
-     * @Assert\NotBlank()
-     * @ORM\Column(name="situation_familaile", type="string", length=40)
+     * @ORM\Column(name="situation_familaile", type="string", length=40,nullable=true)
      */
     protected $sitFamilaile;
 
     /**
      * @var int
-     * @Assert\NotBlank()
-     * @ORM\Column(name="nbre_enfant", type="integer")
+     * @ORM\Column(name="nbre_enfant", type="integer",nullable=true)
      */
     protected $nbreEnfant;
     /**
      * @var int
-     * @Assert\NotBlank()
-     * @ORM\Column(name="salaire", type="float" )
+     * @ORM\Column(name="salaire", type="float",nullable=true)
      */
     private $salaire;
 
