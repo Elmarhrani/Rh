@@ -22,6 +22,13 @@ class User extends BaseUser
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="matricule", type="string", length=20, unique=true)
+     */
+    private $matricule;
+
+    /**
+     * @var string
      * @Assert\NotBlank()
      * @ORM\Column(name="nom", type="string", length=125)
      */
@@ -104,10 +111,22 @@ class User extends BaseUser
     protected $personne_formations;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Messages", mappedBy="user",cascade={"remove"})
+     * One User has One Boite.
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Boite", mappedBy="user")
      */
-    protected $message;
+    private $boite;
 
+    /**
+     * Type de Service
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Service", inversedBy="user" )
+     */
+    private $service;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Candidat", mappedBy="user")
+     */
+    protected $candidat;
 
     public function __construct()
     {
@@ -436,36 +455,106 @@ class User extends BaseUser
         return $this->personne_formations;
     }
 
+
     /**
-     * Add message
+     * Set boite
      *
-     * @param \AppBundle\Entity\Messages $message
+     * @param \AppBundle\Entity\Boite $boite
      * @return User
      */
-    public function addMessage(\AppBundle\Entity\Messages $message)
+    public function setBoite(\AppBundle\Entity\Boite $boite = null)
     {
-        $this->message[] = $message;
+        $this->boite = $boite;
 
         return $this;
     }
 
     /**
-     * Remove message
+     * Get boite
      *
-     * @param \AppBundle\Entity\Messages $message
+     * @return \AppBundle\Entity\Boite 
      */
-    public function removeMessage(\AppBundle\Entity\Messages $message)
+    public function getBoite()
     {
-        $this->message->removeElement($message);
+        return $this->boite;
     }
 
     /**
-     * Get message
+     * Set service
+     *
+     * @param \AppBundle\Entity\Service $service
+     * @return User
+     */
+    public function setService(\AppBundle\Entity\Service $service = null)
+    {
+        $this->service = $service;
+
+        return $this;
+    }
+
+    /**
+     * Get service
+     *
+     * @return \AppBundle\Entity\Service 
+     */
+    public function getService()
+    {
+        return $this->service;
+    }
+
+    /**
+     * Set matricule
+     *
+     * @param string $matricule
+     * @return User
+     */
+    public function setMatricule($matricule)
+    {
+        $this->matricule = $matricule;
+
+        return $this;
+    }
+
+    /**
+     * Get matricule
+     *
+     * @return string 
+     */
+    public function getMatricule()
+    {
+        return $this->matricule;
+    }
+
+    /**
+     * Add candidat
+     *
+     * @param \AppBundle\Entity\Candidat $candidat
+     * @return User
+     */
+    public function addCandidat(\AppBundle\Entity\Candidat $candidat)
+    {
+        $this->candidat[] = $candidat;
+
+        return $this;
+    }
+
+    /**
+     * Remove candidat
+     *
+     * @param \AppBundle\Entity\Candidat $candidat
+     */
+    public function removeCandidat(\AppBundle\Entity\Candidat $candidat)
+    {
+        $this->candidat->removeElement($candidat);
+    }
+
+    /**
+     * Get candidat
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getMessage()
+    public function getCandidat()
     {
-        return $this->message;
+        return $this->candidat;
     }
 }

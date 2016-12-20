@@ -1,24 +1,27 @@
 <?php
-// src/AppBundle/Entity/User.php
 
 namespace AppBundle\Entity;
 
-use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="fos_user")
+ * Candidat
+ *
+ * @ORM\Table(name="candidat")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CandidatRepository")
  */
-class User extends BaseUser
+class Candidat
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
+
 
     /**
      * @var string
@@ -93,54 +96,59 @@ class User extends BaseUser
      * @ORM\Column(name="nbre_enfant", type="integer")
      */
     protected $nbreEnfant;
-    /**
-     * @var int
-     * @Assert\NotBlank()
-     * @ORM\Column(name="salaire", type="float" )
-     */
-    private $salaire;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\FicheSalaire", mappedBy="personne",cascade={"remove"})
-     */
-    protected $fiches;
-
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Personne_Formation", mappedBy="user",cascade={"remove"})
-     */
-    protected $personne_formations;
-
-    /**
-     * One User has One Boite.
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Boite", mappedBy="user")
-     */
-    private $boite;
-
-    /**
-     * Type de Service
+     * Name of amdin li recrutah
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Service", inversedBy="user" )
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="candidat" )
+     */
+    private $user;
+
+    /**
+     * Service of Candidate
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Service", inversedBy="candidat" )
      */
     private $service;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Candidat", mappedBy="user")
+     * Get id
+     *
+     * @return integer 
      */
-    protected $candidat;
-
-    public function __construct()
+    public function getId()
     {
-        parent::__construct();
-        // your own logic
+        return $this->id;
     }
 
+    /**
+     * Set matricule
+     *
+     * @param string $matricule
+     * @return Candidat
+     */
+    public function setMatricule($matricule)
+    {
+        $this->matricule = $matricule;
 
+        return $this;
+    }
+
+    /**
+     * Get matricule
+     *
+     * @return string 
+     */
+    public function getMatricule()
+    {
+        return $this->matricule;
+    }
 
     /**
      * Set nom
      *
      * @param string $nom
-     * @return User
+     * @return Candidat
      */
     public function setNom($nom)
     {
@@ -163,7 +171,7 @@ class User extends BaseUser
      * Set prenom
      *
      * @param string $prenom
-     * @return User
+     * @return Candidat
      */
     public function setPrenom($prenom)
     {
@@ -186,7 +194,7 @@ class User extends BaseUser
      * Set adresse
      *
      * @param string $adresse
-     * @return User
+     * @return Candidat
      */
     public function setAdresse($adresse)
     {
@@ -209,7 +217,7 @@ class User extends BaseUser
      * Set tel
      *
      * @param string $tel
-     * @return User
+     * @return Candidat
      */
     public function setTel($tel)
     {
@@ -232,7 +240,7 @@ class User extends BaseUser
      * Set dateNaiss
      *
      * @param \DateTime $dateNaiss
-     * @return User
+     * @return Candidat
      */
     public function setDateNaiss($dateNaiss)
     {
@@ -255,7 +263,7 @@ class User extends BaseUser
      * Set niveau
      *
      * @param string $niveau
-     * @return User
+     * @return Candidat
      */
     public function setNiveau($niveau)
     {
@@ -278,7 +286,7 @@ class User extends BaseUser
      * Set CIN
      *
      * @param string $cIN
-     * @return User
+     * @return Candidat
      */
     public function setCIN($cIN)
     {
@@ -301,7 +309,7 @@ class User extends BaseUser
      * Set CNSS
      *
      * @param string $cNSS
-     * @return User
+     * @return Candidat
      */
     public function setCNSS($cNSS)
     {
@@ -324,7 +332,7 @@ class User extends BaseUser
      * Set sitFamilaile
      *
      * @param string $sitFamilaile
-     * @return User
+     * @return Candidat
      */
     public function setSitFamilaile($sitFamilaile)
     {
@@ -347,7 +355,7 @@ class User extends BaseUser
      * Set nbreEnfant
      *
      * @param integer $nbreEnfant
-     * @return User
+     * @return Candidat
      */
     public function setNbreEnfant($nbreEnfant)
     {
@@ -367,123 +375,33 @@ class User extends BaseUser
     }
 
     /**
-     * Set salaire
+     * Set user
      *
-     * @param float $salaire
-     * @return User
+     * @param \AppBundle\Entity\User $user
+     * @return Candidat
      */
-    public function setSalaire($salaire)
+    public function setUser(\AppBundle\Entity\User $user = null)
     {
-        $this->salaire = $salaire;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get salaire
+     * Get user
      *
-     * @return float 
+     * @return \AppBundle\Entity\User 
      */
-    public function getSalaire()
+    public function getUser()
     {
-        return $this->salaire;
-    }
-
-    /**
-     * Add fiches
-     *
-     * @param \AppBundle\Entity\FicheSalaire $fiches
-     * @return User
-     */
-    public function addFich(\AppBundle\Entity\FicheSalaire $fiches)
-    {
-        $this->fiches[] = $fiches;
-
-        return $this;
-    }
-
-    /**
-     * Remove fiches
-     *
-     * @param \AppBundle\Entity\FicheSalaire $fiches
-     */
-    public function removeFich(\AppBundle\Entity\FicheSalaire $fiches)
-    {
-        $this->fiches->removeElement($fiches);
-    }
-
-    /**
-     * Get fiches
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getFiches()
-    {
-        return $this->fiches;
-    }
-
-    /**
-     * Add personne_formations
-     *
-     * @param \AppBundle\Entity\Personne_Formation $personneFormations
-     * @return User
-     */
-    public function addPersonneFormation(\AppBundle\Entity\Personne_Formation $personneFormations)
-    {
-        $this->personne_formations[] = $personneFormations;
-
-        return $this;
-    }
-
-    /**
-     * Remove personne_formations
-     *
-     * @param \AppBundle\Entity\Personne_Formation $personneFormations
-     */
-    public function removePersonneFormation(\AppBundle\Entity\Personne_Formation $personneFormations)
-    {
-        $this->personne_formations->removeElement($personneFormations);
-    }
-
-    /**
-     * Get personne_formations
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getPersonneFormations()
-    {
-        return $this->personne_formations;
-    }
-
-
-    /**
-     * Set boite
-     *
-     * @param \AppBundle\Entity\Boite $boite
-     * @return User
-     */
-    public function setBoite(\AppBundle\Entity\Boite $boite = null)
-    {
-        $this->boite = $boite;
-
-        return $this;
-    }
-
-    /**
-     * Get boite
-     *
-     * @return \AppBundle\Entity\Boite 
-     */
-    public function getBoite()
-    {
-        return $this->boite;
+        return $this->user;
     }
 
     /**
      * Set service
      *
      * @param \AppBundle\Entity\Service $service
-     * @return User
+     * @return Candidat
      */
     public function setService(\AppBundle\Entity\Service $service = null)
     {
@@ -500,28 +418,5 @@ class User extends BaseUser
     public function getService()
     {
         return $this->service;
-    }
-
-    /**
-     * Set matricule
-     *
-     * @param string $matricule
-     * @return User
-     */
-    public function setMatricule($matricule)
-    {
-        $this->matricule = $matricule;
-
-        return $this;
-    }
-
-    /**
-     * Get matricule
-     *
-     * @return string 
-     */
-    public function getMatricule()
-    {
-        return $this->matricule;
     }
 }

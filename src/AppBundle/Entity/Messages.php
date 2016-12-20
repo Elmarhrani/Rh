@@ -43,11 +43,25 @@ class Messages
     private $objet;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255)
+     */
+    private $type;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="file_path", type="string", length=255)
+     */
+    private $file_path;
+
+    /**
      * Type de Formation.
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="message" )
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Boite", inversedBy="messages" )
      */
-    private $user;
+    private $boite;
 
     /**
      * Get id
@@ -149,5 +163,74 @@ class Messages
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     * @return Messages
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string 
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set file_path
+     *
+     * @param string $filePath
+     * @return Messages
+     */
+    public function setFilePath($filePath)
+    {
+        $this->file_path = $filePath;
+
+        return $this;
+    }
+
+    /**
+     * Get file_path
+     *
+     * @return string 
+     */
+    public function getFilePath()
+    {
+        return $this->file_path;
+    }
+
+    /**
+     * Set boite
+     *
+     * @param \AppBundle\Entity\Boite $boite
+     * @return Messages
+     */
+    public function setBoite(\AppBundle\Entity\Boite $boite = null)
+    {
+        $this->boite = $boite;
+
+        return $this;
+    }
+
+    /**
+     * Get boite
+     *
+     * @return \AppBundle\Entity\Boite 
+     */
+    public function getBoite()
+    {
+        return $this->boite;
     }
 }
