@@ -8,6 +8,7 @@
 /app/phpunit.xml
 /build/
 /vendor/
+/web/
 /bin/
 /composer.phar
 /src/AppBundle/Entity/*~
