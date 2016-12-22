@@ -1,0 +1,386 @@
+
+{#
+         showImagePersonne
+#}
+{% macro showImagePersonne(personne) %}
+    <center>
+        <img src="{{ asset(personne.image) }}" width="120" height="120" style="border-radius: 50%;margin: 10px auto;">
+        <p style="font-family: 'Montserrat';">
+            {{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}
+        </p>
+    </center>
+{% endmacro %}
+{#
+         showPersonne
+#}
+{% macro showPersonne(presonne) %}
+    <tr>
+        <td>Nom</td>
+        <td>{{ presonne.nom }}</td>
+    </tr>
+    <tr>
+        <td>Prenom</td>
+        <td>{{ presonne.prenom }}</td>
+    </tr>
+    <tr>
+        <td>Adresse</td>
+        <td><p> {{ presonne.adresse }}</p></td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td>{{ presonne.email }}</td>
+    </tr>
+    <tr>
+        <td>Datenaiss</td>
+        <td>{% if presonne.dateNaiss %}{{ presonne.dateNaiss|date('d-m-Y') }}{% endif %}</td>
+    </tr>
+    <tr>
+        <td>Niveau</td>
+        <td>{{ presonne.niveau }}</td>
+    </tr>
+    <tr>
+        <td>Cin</td>
+        <td>{{ presonne.CIN }}</td>
+    </tr>
+    <tr>
+        <td>Cnss</td>
+        <td>{{ presonne.CNSS }}</td>
+    </tr>
+    <tr>
+        <td>Téléphone</td>
+        <td>{{ presonne.tel }}</td>
+    </tr>
+    {#<tr>#}
+    {#<td>Image</td>#}
+    {#<td>{{ presonne.image }}</td>#}
+    {#</tr>#}
+
+{% endmacro %}
+
+{#
+         showStagesPersonne
+#}{#
+
+{% macro showStagesPersonne(candidate) %}
+    <div class="panel-heading" style="margin-top: 40px">
+        <div class="panel-title">Liste des stage</div>
+        <div class="export-options-container pull-right ">
+            <div class="exportOptions">
+                <div class="DTTT btn-group">
+                    <a class="btn btn-default" title="export excile"><span><i class="fa fa-file-pdf-o"></i></span></a>
+                    <a class="btn btn-default" title="ajouter stage au candidat" style="display: none;" href="{{ path('add_stage' ,{ 'personne' : candidate.personne.id } ) }}"><span><i class="fa fa-plus"></i></span></a>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="ShowDataDiv">
+        <table class="table table-hover table-striped ShowDataTable" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th>Type</th>
+                <th>Durée(jours)</th>
+                <th>Remarque</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for stage in candidate.stages %}
+                <tr onclick="showInfo(this,'{{ path('stage_show', { 'id': stage.id }) }}')">
+                    <td>{{ stage.type }}</td>
+                    <td>{% if stage.debut and stage.fin %}{{ stage.getDuree()|date('%a') }}{% endif %}</td>
+                    <td><p>{{ stage.remarque }}</p></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endmacro %}
+#}
+{#
+         showFormationsPersonne
+#}{#
+
+{% macro showFormationsPersonne(candidate) %}
+    <div class="panel-heading">
+        <div class="panel-title">Liste des formations</div>
+        <div class="export-options-container pull-right ">
+            <div class="exportOptions">
+                <div class="DTTT btn-group">
+                    <a class="btn btn-default" title="export excile"><span><i class="fa fa-file-pdf-o"></i></span></a>
+                    <a class="btn btn-default" title="ajouter formation au candidat" style="display: none;" href="{{ path('add_formation' , { 'personne' : candidate.personne.id }) }}"><span><i class="fa fa-plus"></i></span></a>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="ShowDataDiv">
+        <table class="table table-hover table-striped ShowDataTable" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th>Type</th>
+                <th>Durée(jours)</th>
+                <th>Remarque</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for formation in candidate.formations %}
+                <tr onclick="showInfo(this,'{{ path('formation_show', { 'id': formation.id }) }}')">
+                    <td>{{ formation.type }}</td>
+                    <td>{% if formation.debut and formation.fin %}{{ formation.getDuree()|date('%a') }}{% endif %}</td>
+                    <td><p>{{ formation.remarque }}</p></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endmacro %}
+#}
+{#
+         showHistoricPersonne
+#}{#
+
+{% macro showHistoricPersonne(candidate) %}
+    <div class="panel-heading">
+        <div class="panel-title">Historique</div>
+        #}
+{#<div class="export-options-container pull-right ">#}{#
+
+        #}
+{#<div class="exportOptions">#}{#
+
+        #}
+{#<div class="DTTT btn-group">#}{#
+
+        #}
+{#<a class="btn btn-default" title="export excile"><span><i class="fa fa-file-pdf-o"></i></span></a>#}{#
+
+        #}
+{#<a class="btn btn-default" title="ajouter formation au candidat" style="display: none;" href="{{ path('add_note' , { 'personne' : candidate.personne.id }) }}"><span><i class="fa fa-plus"></i></span></a>#}{#
+
+        #}
+{#</div>#}{#
+
+        #}
+{#</div>#}{#
+
+        #}
+{#</div>#}{#
+
+        <div class="clearfix"></div>
+    </div>
+    {% if candidate.historique %}
+        <div class="ShowDataDiv" style="background-color: #f0f0f0;">
+            <div class="timeline-container top-circle">
+                <section class="timeline">
+                    <!-- timeline-block -->
+                    {% for histo in candidate.historique.histories %}
+                        <div class="timeline-block">
+                            {% if histo.type is constant('RECRUTE',histo) %}
+                                <div class="timeline-point success"><i class="pg-map"></i></div>
+                            {% elseif histo.type is constant('EXTRA',histo) %}
+                                <div class="timeline-point warning"><i class="pg-social"></i></div>
+                            {% elseif histo.type is constant('ANNULE',histo) %}
+                                <div class="timeline-point danger"><i class="pg-trash"></i></div>
+                            {% else %}
+                                <div class="timeline-point small"></div>
+                            {% endif %}
+                            <!-- timeline-point -->
+                            <div class="timeline-content">
+                                <div class="card share full-width">
+                                    <div class="circle" data-toggle="tooltip" title="" data-container="body" data-original-title="Label"></div>
+
+                                    <div class="card-description">
+                                        {% if histo.type is constant('RECRUTE',histo) %}
+                                            <h5>Recruter</h5>
+                                        {% elseif histo.type is constant('EXTRA',histo) %}
+                                            <h5>Extra</h5>
+                                        {% elseif histo.type is constant('STAGE',histo) %}
+                                            <h5>Stage</h5>
+                                        {% elseif histo.type is constant('ANNULE',histo) %}
+                                            <h5>Annuler</h5>
+                                        {% endif %}
+                                        <p>{{ histo.cause }}</p>
+                                        <div class="via"></div>
+                                    </div>
+
+                                </div>
+                                <div class="event-date">
+                                    #}
+{#<h6 class="font-montserrat all-caps hint-text m-t-0">Apple Inc</h6>#}{#
+
+                                    <small class="fs-12 hint-text">{{ histo.date|date('d F Y') }}</small>
+                                </div>
+                            </div>
+                            <!-- timeline-content -->
+                        </div>
+                    {% endfor %}
+                    <!-- timeline-block -->
+                </section>
+                <!-- timeline -->
+            </div>
+        </div>
+    {% endif %}
+{% endmacro %}
+#}
+{#
+         showNotesPersonne
+#}{#
+
+{% macro showNotesPersonne(candidate) %}
+    <div class="panel-heading">
+        <div class="panel-title">Liste des Notes</div>
+        <div class="export-options-container pull-right ">
+            <div class="exportOptions">
+                <div class="DTTT btn-group">
+                    <a class="btn btn-default" title="export excile"><span><i class="fa fa-file-pdf-o"></i></span></a>
+                    <a class="btn btn-default" title="ajouter formation au candidat" style="display: none;" href="{{ path('add_note' , { 'personne' : candidate.personne.id }) }}"><span><i class="fa fa-plus"></i></span></a>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="ShowDataDiv">
+        <table class="table table-hover table-striped ShowDataTable" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Note</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for note in candidate.notes %}
+                <tr onclick="showInfo(this,'{{ path('note_show', { 'id': note.id }) }}')">
+                    <td>{{ note.date|date('d-m-Y') }}</td>
+                    <td><p>{{ note.note }}</p></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endmacro %}
+#}
+{#
+         showOptionSalaireEmployee
+#}{#
+
+{% macro showOptionSalaireEmployee(id) %}
+    <div class="row">
+        <div class="col-md-3">
+            <a class="btn btn-block btn-complete" href="{{ path('employee_add_anticipe', { 'personneDecorator': id }) }}">
+                <span class="icon"><i class="fa fa-user"></i></span>
+                <span class="label-ms">Anticipe</span>
+            </a>
+        </div>
+
+        <div class="col-md-3 " >
+            <a class="btn btn-block btn-primary" href="{{ path('employee_add_avance', { 'personneDecorator': id }) }}">
+                <span class="icon"><i class="fa fa-user"></i></span>
+                <span class="label-ms">Avance</span>
+            </a>
+        </div>
+
+        <div class="col-md-3" >
+            <a class="btn btn-block btn-complete" href="{{ path('employee_add_arrondi', { 'personneDecorator': id }) }}">
+                <span class="icon"><i class="fa fa-user"></i></span>
+                <span class="label-ms">Arrondi</span>
+            </a>
+        </div>
+
+        <div class="col-md-3 " >
+            <a class="btn btn-block btn-primary" href="{{ path('employee_add_commission', { 'personneDecorator': id }) }}">
+                <span class="icon"><i class="fa fa-user"></i></span>
+                <span class="label-ms">Commission</span>
+            </a>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 14px">
+        <div class="col-md-3" >
+            <a class="btn btn-block btn-primary" href="{{ path('employee_add_pret', { 'personneDecorator': id }) }}">
+                <span class="icon"><i class="fa fa-user"></i></span>
+                <span class="label-ms">Pret</span>
+            </a>
+        </div>
+        <div class="col-md-3 " >
+            <a class="btn btn-block btn-complete" href="{{ path('employee_add_prime', { 'personneDecorator': id }) }}">
+                <span class="icon"><i class="fa fa-user"></i></span>
+                <span class="label-ms">Prime</span>
+            </a>
+        </div>
+
+        <div class="col-md-3" >
+            <a class="btn btn-block btn-primary" href="{{ path('employee_add_sanction', { 'personneDecorator': id }) }}">
+                <span class="icon"><i class="fa fa-user"></i></span>
+                <span class="label-ms">Sanction</span>
+            </a>
+        </div>
+        <div class="col-md-3 " >
+            <a class="btn btn-block btn-complete" href="{{ path('employee_add_regularisation', { 'personneDecorator': id }) }}">
+                <span class="icon"><i class="fa fa-user"></i></span>
+                <span class="label-ms">Régularisation</span>
+            </a>
+        </div>
+    </div>
+{% endmacro %}
+#}
+{#
+         showOptionSalaireExtra
+#}{#
+
+{% macro showOptionSalaireExtra(id) %}
+    <div class="row">
+        <div class="col-md-3">
+            <a class="btn btn-block btn-complete" href="{{ path('extra_add_anticipe', { 'personneDecorator': id }) }}">
+                <span class="icon"><i class="fa fa-user"></i></span>
+                <span class="label-ms">Anticipe</span>
+            </a>
+        </div>
+
+        <div class="col-md-3 " >
+            <a class="btn btn-block btn-primary" href="{{ path('extra_add_avance', { 'personneDecorator': id }) }}">
+                <span class="icon"><i class="fa fa-user"></i></span>
+                <span class="label-ms">Avance</span>
+            </a>
+        </div>
+
+        <div class="col-md-3" >
+            <a class="btn btn-block btn-complete" href="{{ path('extra_add_arrondi', { 'personneDecorator': id }) }}">
+                <span class="icon"><i class="fa fa-user"></i></span>
+                <span class="label-ms">Arrondi</span>
+            </a>
+        </div>
+
+        <div class="col-md-3 " >
+            <a class="btn btn-block btn-primary" href="{{ path('extra_add_commission', { 'personneDecorator': id }) }}">
+                <span class="icon"><i class="fa fa-user"></i></span>
+                <span class="label-ms">Commission</span>
+            </a>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 14px">
+        <div class="col-md-3" >
+            <a class="btn btn-block btn-primary" href="{{ path('extra_add_pret', { 'personneDecorator': id }) }}">
+                <span class="icon"><i class="fa fa-user"></i></span>
+                <span class="label-ms">Pret</span>
+            </a>
+        </div>
+        <div class="col-md-3 " >
+            <a class="btn btn-block btn-complete" href="{{ path('extra_add_prime', { 'personneDecorator': id }) }}">
+                <span class="icon"><i class="fa fa-user"></i></span>
+                <span class="label-ms">Prime</span>
+            </a>
+        </div>
+
+        <div class="col-md-3" >
+            <a class="btn btn-block btn-primary" href="{{ path('extra_add_sanction', { 'personneDecorator': id }) }}">
+                <span class="icon"><i class="fa fa-user"></i></span>
+                <span class="label-ms">Sanction</span>
+            </a>
+        </div>
+        <div class="col-md-3 " >
+            <a class="btn btn-block btn-complete" href="{{ path('extra_add_regularisation', { 'personneDecorator': id }) }}">
+                <span class="icon"><i class="fa fa-user"></i></span>
+                <span class="label-ms">Régularisation</span>
+            </a>
+        </div>
+    </div>
+{% endmacro %}#}

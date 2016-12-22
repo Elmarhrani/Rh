@@ -1,0 +1,31 @@
+
+<div class="modal fade slide-up disable-scroll" id="modalSlideUp" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content-wrapper">
+            <div class="modal-content">
+                <div class="modal-header clearfix text-left">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i>
+                    </button>
+                    {% block modalSlideUp_header %}
+                        <h5><span class="semi-bold" id="messageSuppresion">Suppression</span></h5>
+                        {#<p class="p-b-10" >voulez vous vraiment supprimée  {% block TYPE %} {% endblock TYPE %}</p>#}
+                    {% endblock %}
+                </div>
+                <div class="modal-body">
+                    {% block modalSlideUp_body %}
+                        <div class="row">
+                            <div class="col-sm-6">
+                            </div>
+                            <div class="col-sm-3 m-t-10 sm-m-t-10">
+                                <button type="button" class="btn btn-block m-t-5 btn-warning" onclick="DeleteEntity('hide')" data-dismiss="modal">Annuler</button>
+                            </div>
+                            <div class="col-sm-3 m-t-10 sm-m-t-10">
+                                <button type="button" class="btn btn-danger btn-block m-t-5" onclick="delete_form.submit()" data-dismiss="modal">supprimer</button>
+                            </div>
+                        </div>
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

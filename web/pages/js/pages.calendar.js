@@ -348,8 +348,8 @@
                 $(this.container).html("");
                 Calendar.daysOfMonth = moment([calendar.year, calendar.month]).daysInMonth();
                 Calendar.content = "";
-                var weekStart = parseInt(moment(Calendar.settings.ui.week.startOfTheWeek,'d').format('d'));
-                var weekEnd = parseInt(moment(Calendar.settings.ui.week.endOfTheWeek,'d').format('d'));
+                var weekStart = parseInt(moment(/*Calendar.settings.ui.week.startOfTheWeek*/ 1,'d').format('d'));
+                var weekEnd = parseInt(moment(/*Calendar.settings.ui.week.endOfTheWeek*/ 0,'d').format('d'));
 
                 for (var i = 1; i <= Calendar.daysOfMonth; i++) {
                     var date = moment([calendar.year, calendar.month, i]);
@@ -357,7 +357,8 @@
                     var activeClass = (calendar.date == i) ? 'active current-date' : '';
 
                     (t ==  weekStart || i == 1) ? Calendar.content += '<div class="week ' + activeClass + '">': '';
-                        if(t >= weekStart && t <= weekEnd){
+                        // if(t >= weekStart && t <= weekEnd)
+                        {
                             Calendar.content += '<div class="day-wrapper date-selector">';
                             Calendar.content += '<div class="week-day">';
                             Calendar.content += '<div class="day week-header">' + date.format(Calendar.settings.ui.week.header.format) + '</div>';
@@ -573,6 +574,7 @@
                 column++;
             }
             calendar.startOfWeekDate = moment([calendar.year, calendar.month, calendar.date]).startOf('week');
+            // myfunction
             this.showDisableDates();
             this._drawEvent();
         }
@@ -938,6 +940,7 @@
             this.endOfWeek = moment([calendar.year, calendar.month, calendar.date]).startOf('week').add("days",Calendar.settings.ui.week.endOfTheWeek);
             this._loadDates();
             this._setActive();
+            plugin.settings.onViewRenderRefresh();
             var dates = [this.startOfWeek,this.endOfWeek];
             this.setEventBubbles(Calendar.settings.events)
             return dates;
@@ -1957,8 +1960,8 @@
                 year: {
                     visible: true,
                     format: 'YYYY',
-                    startYear: '2000',
-                    endYear: moment().add(10, 'year').format('YYYY'),
+                    startYear: '2010',
+                    endYear: moment().add(15, 'year').format('YYYY'),
                     eventBubble: true
                 },
                 //Month Selector
@@ -2008,6 +2011,7 @@
             weekends:true,
             disableDates:[],
             //Event CallBacks
+            onViewRenderRefresh: function() {console.log("onViewRenderRefresh");},
             onViewRenderComplete: function() {},
             onEventDblClick: function() {},
             onEventClick: function(event) {},
@@ -2015,7 +2019,7 @@
             onEventDragComplete: function(event) {},
             onEventResizeComplete: function(event) {},
             onTimeSlotDblClick: function(timeSlot) {},
-            onDateChange:function(range){}
+            onDateChange:function(range){ }
             /*
             TO DO 
             eventDragStart (callback)

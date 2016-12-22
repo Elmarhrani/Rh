@@ -11,7 +11,7 @@
 
     // DEMO MODALS SIZE TOGGLER
 
-    $('#btnToggleSlideUpSize').click(function() {
+    $('#btnToggleSlideUpSize').click(function(size) {
         var size = $('input[name=slideup_toggler]:checked').val()
         var modalElem = $('#modalSlideUp');
         if (size == "mini") {

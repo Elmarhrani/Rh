@@ -2284,12 +2284,12 @@
 			else if ( cOption == 'l' && features.bPaginate && features.bLengthChange )
 			{
 				/* Length */
-				featureNode = _fnFeatureHtmlLength( oSettings );
+				 featureNode = _fnFeatureHtmlLength( oSettings );
 			}
 			else if ( cOption == 'f' && features.bFilter )
 			{
 				/* Filter */
-				featureNode = _fnFeatureHtmlFilter( oSettings );
+				// featureNode = _fnFeatureHtmlFilter( oSettings );
 			}
 			else if ( cOption == 'r' && features.bProcessing )
 			{
@@ -2825,7 +2825,7 @@
 		str = str.match(/_INPUT_/) ?
 			str.replace('_INPUT_', input) :
 			str+input;
-	
+
 		var filter = $('<div/>', {
 				'id': ! features.f ? tableId+'_filter' : null,
 				'class': classes.sFilter
@@ -3452,28 +3452,30 @@
 			lengths  = d2 ? menu[0] : menu,
 			language = d2 ? menu[1] : menu;
 	
-		var select = $('<select/>', {
-			'name':          tableId+'_length',
-			'aria-controls': tableId,
-			'class':         classes.sLengthSelect
-		} );
+		var select = $('#tableWithSearch_length');
+		// 	$('<select/>', {
+		// 	'name':          tableId+'_length',
+		// 	'aria-controls': tableId,
+		// 	'class':         classes.sLengthSelect
+		// } );
+        //
+		// for ( var i=0, ien=lengths.length ; i<ien ; i++ ) {
+		// 	select[0][ i ] = new Option( language[i], lengths[i] );
+		// }
 	
-		for ( var i=0, ien=lengths.length ; i<ien ; i++ ) {
-			select[0][ i ] = new Option( language[i], lengths[i] );
-		}
-	
-		var div = $('<div><label/></div>').addClass( classes.sLength );
-		if ( ! settings.aanFeatures.l ) {
-			div[0].id = tableId+'_length';
-		}
-	
-		div.children().append(
-			settings.oLanguage.sLengthMenu.replace( '_MENU_', select[0].outerHTML )
-		);
+		// var div = $('<div><label/></div>').addClass( classes.sLength );
+		// if ( ! settings.aanFeatures.l ) {
+		// 	div[0].id = tableId+'_length';
+		// }
+        //
+		// div.children().append(
+		// 	settings.oLanguage.sLengthMenu.replace( '_MENU_', select[0].outerHTML )
+		// );
 	
 		// Can't use `select` variable as user might provide their own and the
 		// reference is broken by the use of outerHTML
-		$('select', div)
+		// $('select', div)
+		select
 			.val( settings._iDisplayLength )
 			.bind( 'change.DT', function(e) {
 				_fnLengthChange( settings, $(this).val() );
@@ -3483,11 +3485,14 @@
 		// Update node value whenever anything changes the table's length
 		$(settings.nTable).bind( 'length.dt.DT', function (e, s, len) {
 			if ( settings === s ) {
-				$('select', div).val( len );
+				// $('select', div)
+				select
+					.val( len );
 			}
 		} );
 	
-		return div[0];
+		// return div[0];
+		return select.parent();
 	}
 	
 	
@@ -9979,7 +9984,7 @@
 		 *      } );
 		 *    } );
 		 */
-		"aLengthMenu": [ 10, 25, 50, 100 ],
+		"aLengthMenu": [ 5 ,10, 25, 50, 100 ],
 	
 	
 		/**
