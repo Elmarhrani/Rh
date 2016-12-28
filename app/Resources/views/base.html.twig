@@ -12,26 +12,19 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% block default_stylesheets %}
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
-            <link href="{{ asset('assets/plugins/pace/pace-theme-flash.css') }}" rel="stylesheet" type="text/css"/>
-            <link href="{{ asset('assets/plugins/bootstrapv3/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
-            <link href="{{ asset('assets/plugins/font-awesome/css/font-awesome.css') }}" rel="stylesheet" type="text/css"/>
-            <link href="{{ asset('assets/plugins/jquery-scrollbar/jquery.scrollbar.css') }}" rel="stylesheet" type="text/css"/>
-            <link href="{{ asset('assets/plugins/bootstrap-select2/select2.css') }}" rel="stylesheet" type="text/css"/>
-            <link href="{{ asset('assets/plugins/switchery/css/switchery.min.css') }}" rel="stylesheet" type="text/css"/>
-            <link href="{{ asset('assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.min.css') }}" rel="stylesheet" type="text/css"/>
-            <link href="{{ asset('assets/plugins/bootstrap-tag/bootstrap-tagsinput.css') }}" rel="stylesheet" type="text/css"/>
-            <link href="{{ asset('assets/plugins/dropzone/css/dropzone.css') }}" rel="stylesheet" type="text/css"/>
-            <link href="{{ asset('assets/plugins/bootstrap-datepicker/css/datepicker3.css') }}" rel="stylesheet" type="text/css"/>
-            <link href="{{ asset('assets/plugins/summernote/css/summernote.css') }}" rel="stylesheet" type="text/css"/>
-            <link href="{{ asset('assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css') }}" rel="stylesheet" type="text/css"/>
-            <link href="{{ asset('assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.css') }}" rel="stylesheet" type="text/css"/>
-            <link href="{{ asset('assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
-            <link href="{{ asset('assets/plugins/jquery-datatable/extensions/FixedColumns/css/dataTables.fixedColumns.min.css') }}" rel="stylesheet" type="text/css"/>
-            <link href="{{ asset('assets/plugins/datatables-responsive/css/datatables.responsive.css') }}" rel="stylesheet" type="text/css"/>
-            <link href="{{ asset('pages/css/pages-icons.css') }}" rel="stylesheet" type="text/css"/>
-            <link href="{{ asset('pages/css/pages.css') }}" rel="stylesheet" type="text/css"/>
-            <link href="{{ asset('pages/css/themes/calendar.css') }}" rel="stylesheet" type="text/css"/>
-            <link href="{{ asset('assets/css/mainStyle.css') }}" rel="stylesheet" type="text/css"/>
+            <link rel="apple-touch-icon" href="pages/ico/60.png">
+            <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
+            <link rel="apple-touch-icon" sizes="120x120" href="pages/ico/120.png">
+            <link rel="apple-touch-icon" sizes="152x152" href="pages/ico/152.png">
+            <link rel="icon" type="image/x-icon" href="favicon.ico" />
+            <link href="assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" />
+            <link href="assets/plugins/bootstrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+            <link href="assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+            <link href="assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen" />
+            <link href="assets/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen" />
+            <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
+            <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
+            <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
         {% endblock %}
         <script type="text/javascript">
             window.onload = function()
@@ -43,41 +36,9 @@
         </script>
     </head>
     <body class="fixed-header ">
-    {% block body %}
-        <!-- BEGIN SIDEBPANEL-->
-        {% include 'sidebar.html.twig' %}
-        <!-- END SIDEBAR -->
-        <!-- START PAGE-CONTAINER -->
-        <div class="page-container ">
+        {% block body %}
 
-            <!-- START HEADER -->
-            {% include 'header.html.twig' %}
-            <!-- END HEADER -->
-
-            <!-- START PAGE CONTENT WRAPPER -->
-            <div class="page-content-wrapper " id="content-div">
-                <!-- START PAGE CONTENT -->
-               <div class="content  {% if calendar is defined %} full-heigth {% endif %}"   >
-                    <!-- START JUMBOTRON -->
-                    {% block CONTENT %}     {% endblock %}
-                </div>
-                <!-- END PAGE CONTENT -->
-                <!-- START COPYRIGHT -->
-                <!-- START CONTAINER FLUID -->
-                <!-- START CONTAINER FLUID -->
-                {% include 'footer.html.twig' %}
-                <!-- END COPYRIGHT -->
-            </div>
-            <!-- END PAGE CONTENT WRAPPER -->
-        </div>
-        <!-- END PAGE CONTAINER -->
-
-
-        <!--START QUICKVIEW -->
-        {% block QUICKVIEW %}   {% endblock %}
-        <!-- END QUICKVIEW-->
-
-    {% endblock %}
+        {% endblock %}
     <!-- BEGIN VENDOR JS -->
     {% block default_javascripts %}
     <script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
@@ -103,50 +64,6 @@
             $('#form-login').validate()
         })
     </script>
-    {% endblock %}
-    {% block javascripts %}
-        <script >
-            $(document).ready(function () {
-                var settings;
-                body = $('body');
-
-                {% if app.session.flashBag.has('error') %}
-                {% for msg in app.session.flashBag.get('error') %}
-                settings = {
-                    "message": '{{ msg }}',
-                    "type": 'danger',
-                    "style": 'flip',
-                    "timeout" : 4000
-                };
-                body.pgNotification(settings).show();
-                {% endfor %}
-                {% endif %}
-
-                {% if app.session.flashBag.has('info') %}
-                {% for msg in app.session.flashBag.get('info') %}
-                settings = {
-                    "message": '{{ msg }}',
-                    "type": 'info',
-                    "style": 'flip',
-                    "timeout" : 4000
-                };
-                body.pgNotification(settings).show();
-                {% endfor %}
-                {% endif %}
-
-                {% if app.session.flashBag.has('success') %}
-                {% for msg in app.session.flashBag.get('success') %}
-                settings = {
-                    "message": '{{ msg }}',
-                    "type": 'success',
-                    "style": 'flip',
-                    "timeout" : 4000
-                };
-                body.pgNotification(settings).show();
-                {% endfor %}
-                {% endif %}
-            })
-        </script>
     {% endblock %}
     </body>
 </html>
