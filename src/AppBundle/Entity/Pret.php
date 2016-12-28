@@ -35,6 +35,14 @@ class Pret
     private $detailsPret;
 
     /**
+     * Type de Service
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="pret" )
+     */
+    private $user;
+
+
+    /**
      * Get id
      *
      * @return integer 
@@ -105,5 +113,28 @@ class Pret
     public function getMois()
     {
         return $this->mois;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     * @return Pret
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

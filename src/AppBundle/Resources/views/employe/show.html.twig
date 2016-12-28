@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends '::base.html.twig' %}
 {% import '@App/_macros.html.twig' as iMacro %}
 
 {% block CONTENT %}
@@ -15,7 +15,7 @@
                 <div class="exportOptions">
                     <div class="DTTT btn-group">
                         <a class="btn btn-default" title="export excile"><span><i class="fa fa-file-pdf-o"></i></span></a>
-                        <a class="btn btn-default" title="" href="{{ path('employee_edit', { 'id': employee.id }) }}"><span><i class="fa fa-edit"></i></span></a>
+                        <a class="btn btn-default" title="" {#href="{{ path('employee_edit', { 'id': employee.id }) }}"#}><span><i class="fa fa-edit"></i></span></a>
                        {# {{ form_start(delete_form,{ 'attr': {'style' : "display: inline-block",'class': "btn btn-default " ,'onclick' : "DeleteEntity('show',this);return false",'title':"Suppprimer ",'data-message':"Supprimer cet employé ? "}}) }}  <span><i class="fa fa-trash-o"></i></span> <button hidden="hidden"  type="submit"  > </button> {{ form_end(delete_form) }}#}
                         <a class="btn btn-default" title="" data-index="{{ employee.id }}" data-target="#modalFillIn" data-toggle="modal" id="btnFillSizeToggler2" style="display: none;"><span><i class="fa fa-plus"></i></span></a>
                     </div>
@@ -28,16 +28,58 @@
 
             <table  class="table table-hover table-striped ShowDataTable towCln" cellspacing="0" width="100%">
                 <tbody>
-                <tr>
-                    <td>Matricule</td>
-                    <td>{{ employee.matricule }}</td>
-                </tr>
-                <tr>
-                    <td>Salaire</td>
-                    <td>{{ employee.salaire }}</td>
-                </tr>
-
-
+                    <tr>
+                        <td>Matricule</td>
+                        <td>{{ employee.matricule }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nom</td>
+                        <td>{{ employee.nom }}</td>
+                    </tr>
+                    <tr>
+                        <td>Prenom</td>
+                        <td>{{ employee.prenom }}</td>
+                    </tr>
+                    <tr>
+                        <td>Adresse</td>
+                        <td>{{ employee.adresse }}</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>{{ employee.email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Datenaiss</td>
+                        <td>{% if employee.dateNaiss %}{{ employee.dateNaiss|date('d-m-Y') }}{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td>Niveau</td>
+                        <td>{{ employee.niveau }}</td>
+                    </tr>
+                    <tr>
+                        <td>Cin</td>
+                        <td>{{ employee.CIN }}</td>
+                    </tr>
+                    <tr>
+                        <td>Cnss</td>
+                        <td>{{ employee.CNSS }}</td>
+                    </tr>
+                    <tr>
+                        <td>Téléphone</td>
+                        <td>{{ employee.tel }}</td>
+                    </tr>
+                    <tr>
+                        <td>Situation Familaile</td>
+                        <td>{{ employee.sitFamilaile }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nombre Enfant</td>
+                        <td>{{ employee.nbreEnfant }}</td>
+                    </tr>
+                    <tr>
+                        <td>Téléphone</td>
+                        <td>{{ employee.tel }}</td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -48,16 +90,22 @@
           cette div sera injecter dans la deuxième Tab : tab="formation"
       #}
     <div id="profile" tab="formation">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Adipisci earum sit soluta ullam, unde veniam? Accusamus assumenda culpa eius exercitationem
+        facilis hic, illum incidunt nostrum officia optio quo sapiente ut!
        {# {{ iMacro.showFormationsPersonne(employee) }}
 
         {{ iMacro.showStagesPersonne(employee) }}#}
     </div>
 
     <div id="messages" tab="historique">
-        {{ iMacro.showHistoricPersonne(employee) }}
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        A accusantium aliquid assumenda atque commodi cum dolores esse ipsam magnam nam
+        nihil nobis non nulla porro quo repellendus rerum saepe, velit.
+       {# {{ iMacro.showHistoricPersonne(employee) }}
 
         {{ iMacro.showNotesPersonne(employee) }}
-
+#}
     </div>
 
 {% endblock %}

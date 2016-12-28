@@ -38,6 +38,12 @@ class User extends BaseUser
     protected $prenom;
 
     /**
+     * @var string
+     * @ORM\Column(name="image", type="string", length=125,nullable=true)
+     */
+    protected $image;
+
+    /**
      * @ORM\Column(name="adresse", type="string", length=255,nullable=true)
      */
     protected $adresse;
@@ -114,6 +120,11 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Candidat", mappedBy="user")
      */
     protected $candidat;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Pret", mappedBy="user")
+     */
+    protected $pret;
 
     public function __construct()
     {
@@ -543,5 +554,61 @@ class User extends BaseUser
     public function getCandidat()
     {
         return $this->candidat;
+    }
+
+    /**
+     * Add pret
+     *
+     * @param \AppBundle\Entity\Pret $pret
+     * @return User
+     */
+    public function addPret(\AppBundle\Entity\Pret $pret)
+    {
+        $this->pret[] = $pret;
+
+        return $this;
+    }
+
+    /**
+     * Remove pret
+     *
+     * @param \AppBundle\Entity\Pret $pret
+     */
+    public function removePret(\AppBundle\Entity\Pret $pret)
+    {
+        $this->pret->removeElement($pret);
+    }
+
+    /**
+     * Get pret
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPret()
+    {
+        return $this->pret;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     * @return User
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

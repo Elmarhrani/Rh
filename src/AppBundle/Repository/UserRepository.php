@@ -1,16 +1,8 @@
 <?php
 
-/*
- * This file is part of the m-Shield Project.
- *
- * (c) Multi Information Technology <http://www.mit.co.ma>
- *
- * This source file is subject to the license that is bundled
- * with this source code in the file LICENSE.
- */
+namespace AppBundle\Repository;
 
-namespace MShieldBundle\Repository;
-
+use AppBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -21,4 +13,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
+
+    /**
+     * @return User
+     **/
+    public function findLastUser() {
+
+        $query = $this->createQueryBuilder('c')
+            ->select('c')
+            ->orderBy('c.matricule', 'DESC')->setMaxResults(1);
+
+        return $query->getQuery()->getOneOrNullResult();
+    }
+
 }

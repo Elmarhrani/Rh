@@ -1,10 +1,6 @@
 {% extends ':adefault:base.html.twig' %}
 
 {% block quickviewTabs %}
-    {#
-       **  3 c'est le nombre max de tab
-       **  le show.twig doit donc contenire 3 div avec les id refirencer dans l href dessous
-    #}
     <li class="active">
         <a data-toggle="tab" href="#home" aria-expanded="true"><span>Employé</span></a>
     </li>
@@ -15,6 +11,7 @@
         <a data-toggle="tab" href="#messages" aria-expanded="false"><span>Historique</span></a>
     </li>
 {% endblock quickviewTabs %}
+
 {% block DataTable %}
 
     <div class="container-fluid container-fixed-lg" >
@@ -39,7 +36,7 @@
                             </a>
                             {#<a class="btn btn-default DTTT_button_xls" id="ToolTables_tableWithExportOptions_1" tabindex="0" aria-controls="tableWithExportOptions" data-original-title="" title="export excile"><span><i class="fa fa-file-excel-o"></i></span></a>#}
                             <a class="btn btn-default DTTT_button_pdf"  title="" ><span><i class="fa fa-file-pdf-o"></i></span></a>
-                            <a class="btn btn-default DTTT_button_copy" title="" href="#" ><span><i class="fa fa-plus"></i></span></a>
+                            <a class="btn btn-default DTTT_button_copy" title="" href="{{ path('employee_new') }}" ><span><i class="fa fa-plus"></i></span></a>
                             <label>
                                 <select id="tableWithSearch_length" name="tableWithSearch_length" aria-controls="tableWithSearch" class="cs-select cs-skin-slide" data-init-plugin="cs-select">
                                     <option value="5">5</option>
@@ -97,7 +94,7 @@
 
 {% endblock %}
 
-{% block javascripts   %}
+{% block javascripts %}
     {{ parent() }}
     <script type="application/javascript">
         $(document).ready(function () {

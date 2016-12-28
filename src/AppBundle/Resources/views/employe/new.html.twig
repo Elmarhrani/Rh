@@ -1,0 +1,30 @@
+{% extends 'form.layout.html.twig' %}
+
+
+{% block form_title %}
+    Employé creation : {{ employee.matricule }}
+{% endblock %}
+
+{% block form_content %}
+
+
+    {%- for child in form %}
+        <div class="row">
+            {{- form_row(child) -}}
+        </div>
+    {% endfor -%}
+
+    <div class="row clearfix">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-xs-6" style="padding: 0">
+                <a href="#{#{{ path('AnnuleAction') }}#}" class="btn btn-success" style="width: 100%">Annuler</a>
+            </div>
+            <div class="col-xs-6">
+                <input type="submit" class="btn btn-complete" style="width: 100%"  value="Ajouter"/>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+
+{% endblock %}

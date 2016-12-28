@@ -45,13 +45,13 @@
     <body class="fixed-header ">
     {% block body %}
         <!-- BEGIN SIDEBPANEL-->
-        {% include 'sidebar.html.twig' %}
+{#        {% include 'sidebar.html.twig' %}#}
         <!-- END SIDEBAR -->
         <!-- START PAGE-CONTAINER -->
         <div class="page-container ">
 
             <!-- START HEADER -->
-            {% include 'header.html.twig' %}
+{#            {% include 'header.html.twig' %}#}
             <!-- END HEADER -->
 
             <!-- START PAGE CONTENT WRAPPER -->
@@ -71,11 +71,6 @@
             <!-- END PAGE CONTENT WRAPPER -->
         </div>
         <!-- END PAGE CONTAINER -->
-
-
-        <!--START QUICKVIEW -->
-        {% block QUICKVIEW %}   {% endblock %}
-        <!-- END QUICKVIEW-->
 
     {% endblock %}
     <!-- BEGIN VENDOR JS -->

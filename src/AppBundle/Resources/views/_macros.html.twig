@@ -57,9 +57,8 @@
 
 {% endmacro %}
 
-{#
-         showStagesPersonne
-#}{#
+{#         showStagesPersonne#}
+
 
 {% macro showStagesPersonne(candidate) %}
     <div class="panel-heading" style="margin-top: 40px">
@@ -95,10 +94,10 @@
         </table>
     </div>
 {% endmacro %}
-#}
 {#
          showFormationsPersonne
-#}{#
+
+#}
 
 {% macro showFormationsPersonne(candidate) %}
     <div class="panel-heading">
@@ -134,37 +133,28 @@
         </table>
     </div>
 {% endmacro %}
-#}
-{#
-         showHistoricPersonne
-#}{#
+
+{#         showHistoricPersonne#}
+
 
 {% macro showHistoricPersonne(candidate) %}
     <div class="panel-heading">
         <div class="panel-title">Historique</div>
-        #}
-{#<div class="export-options-container pull-right ">#}{#
+<div class="export-options-container pull-right ">
 
-        #}
-{#<div class="exportOptions">#}{#
+<div class="exportOptions">
 
-        #}
-{#<div class="DTTT btn-group">#}{#
+<div class="DTTT btn-group">
 
-        #}
-{#<a class="btn btn-default" title="export excile"><span><i class="fa fa-file-pdf-o"></i></span></a>#}{#
+<a class="btn btn-default" title="export excile"><span><i class="fa fa-file-pdf-o"></i></span></a>
 
-        #}
-{#<a class="btn btn-default" title="ajouter formation au candidat" style="display: none;" href="{{ path('add_note' , { 'personne' : candidate.personne.id }) }}"><span><i class="fa fa-plus"></i></span></a>#}{#
+<a class="btn btn-default" title="ajouter formation au candidat" style="display: none;" href="{{ path('add_note' , { 'personne' : candidate.personne.id }) }}"><span><i class="fa fa-plus"></i></span></a>
 
-        #}
-{#</div>#}{#
+</div>
 
-        #}
-{#</div>#}{#
+</div>
 
-        #}
-{#</div>#}{#
+</div>
 
         <div class="clearfix"></div>
     </div>
@@ -205,8 +195,7 @@
 
                                 </div>
                                 <div class="event-date">
-                                    #}
-{#<h6 class="font-montserrat all-caps hint-text m-t-0">Apple Inc</h6>#}{#
+<h6 class="font-montserrat all-caps hint-text m-t-0">Apple Inc</h6>
 
                                     <small class="fs-12 hint-text">{{ histo.date|date('d F Y') }}</small>
                                 </div>
@@ -221,10 +210,8 @@
         </div>
     {% endif %}
 {% endmacro %}
-#}
-{#
          showNotesPersonne
-#}{#
+
 
 {% macro showNotesPersonne(candidate) %}
     <div class="panel-heading">
@@ -258,10 +245,8 @@
         </table>
     </div>
 {% endmacro %}
-#}
-{#
          showOptionSalaireEmployee
-#}{#
+
 
 {% macro showOptionSalaireEmployee(id) %}
     <div class="row">
@@ -321,10 +306,8 @@
         </div>
     </div>
 {% endmacro %}
-#}
-{#
          showOptionSalaireExtra
-#}{#
+
 
 {% macro showOptionSalaireExtra(id) %}
     <div class="row">
@@ -383,4 +366,4 @@
             </a>
         </div>
     </div>
-{% endmacro %}#}
+{% endmacro %}

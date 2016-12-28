@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/test", name="homepage")
      */
     public function indexAction(Request $request)
     {
@@ -22,7 +22,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/test", name="testpage")
+     * @Route("/", name="testpage")
      */
     public function testAction(Request $request)
     {
@@ -41,10 +41,29 @@ class DefaultController extends Controller
      * @Route("/{id}/show", name="employee_show")
      */
     public function showAction(User $employee) {
-        return $this->render('AppBundle:employee:test.html.twig', array(
+        return $this->render('AppBundle:employe:show.html.twig', array(
             'employee'    => $employee,
         ));
     }
+
+    /**
+     * @Route("/new", name="employee_new")
+     */
+    public function newAction(Request $request) {
+        $employee = new User();
+        $form = $this->createForm('AppBundle\Form\UserType', $employee);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            die('form howa hadak');
+        }
+        return $this->render('AppBundle:employe:new.html.twig', array(
+            'employee' => $employee,
+            'form'     => $form->createView(),
+        ));
+    }
+
+
 
 
 }
